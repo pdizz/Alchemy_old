@@ -1,0 +1,94 @@
+/* COLORS: #0A1411 #363A27 #85753D #E5C77A #E6CB94*/
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/********************End CSS Reset******************************/
+
+html { font-family : verdana; font-size : 14px; display : block;}
+
+#effselect { float : right;}
+#ingselect { float : left;}
+#ingfilter { display : block; width : 20%; }
+
+.selectable .ui-selecting { background: #E5C77A; color : black;}
+.selectable .ui-selected { background: #E6CB94; color : black; }
+.selectable { 
+    list-style-type: none; 
+    width : 20%;
+    height : 100%;
+    margin: 0px; padding: 0px;
+    background : #0A1411;
+    overflow : auto;
+}
+
+.selectable li { 
+    margin: .2em; 
+    padding: .2em;
+    font-size: 1em; 
+    height: 1.4em;
+    background : #363A27;
+    color : white;
+    overflow : hidden;
+    line-height: 1.4em;
+}
+
+#recipe { 
+    float : left; 
+    /*text-align: center; */
+    width : 60%;
+    height : 100%;
+    background : #E6CB94;
+    margin : 0;
+    overflow : auto;
+}
+
+#recipe img { display: block; float: left;}
+#recipe dl { float: right;}
+#recipe dt, h1{ font-size : 1.8em; margin : .4em; font-weight: bold;}
