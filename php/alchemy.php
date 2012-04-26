@@ -151,6 +151,7 @@ else if (isset($_GET['eff'])) {
         while ($row = $sth->fetch()) {
             $recipe[] = $row;
         }
+        //var_dump($recipe);
         
         for($i=0; $i<count($recipe); $i++) {
             $recipe[$i]['link'] = false;
@@ -160,7 +161,7 @@ else if (isset($_GET['eff'])) {
             if($recipe[$i]['ing_name'] == $recipe[$i-1]['ing_name']) { //check for duplicate. **array must be sorted by ing_name**
                 $recipe[$i-1]['eff_name'] .= ', '.$recipe[$i]['eff_name']; //Combine eff_name of duplicates
                 $recipe[$i-1]['link'] = true;
-                unset($recipe[$i]); //remove duplicate index
+                array_slice($recipe, $i); //remove duplicate index
             }
         }
 

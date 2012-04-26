@@ -6,13 +6,12 @@ $(document).ready(function() {
         id : "filter"
     });
 
-    $starts = $('<input type="checkbox" checked="yes" id="starts"><label for="starts">Starts with</label></input>');
+    $starts = $('<input type="checkbox" checked="yes" id="starts"><label for="starts">Starts with (uncheck to search anywhere in string)</label></input>');
 
     $filter = $('<input/>', {
         type : 'text',
         id : 'ingfilter',
-        size : '30px',
-        label : 'Filter by: '
+        size : '30px'
     });
     
     $ingredients = $('<ul/>', {
@@ -157,7 +156,12 @@ $(document).ready(function() {
                             /************INSERT IMAGE**********************/
                             //opts += '<img src="images/no.jpg"></img>';
                             
-                            opts += '<dt>' + json[i]['ing_name'] + '</dt>';
+                            if(json[i]['link']) {
+                                opts += '<dt class="link">' + json[i]['ing_name'] + '<dt>';
+                            }
+                            else {
+                                opts += '<dt>' + json[i]['ing_name'] + '</dt>';
+                            }
                             opts += '<dd>Active Effect: <span>' + json[i]['eff_name'] 
                             + '</span></dd>';
                             opts += '<dd>Weight: ' + json[i]['weight'] + '</dd>';
