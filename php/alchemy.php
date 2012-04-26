@@ -49,10 +49,18 @@ if(isset($_GET['ing'])) {
         $sth->execute();
         
         //output
-        if(isset($_GET['csv'])) {
-            while ($row = $sth->fetch()) {
-                echo $row['ing_name'] . ',';
+//        if(isset($_GET['csv'])) {
+//            while ($row = $sth->fetch()) {
+//                echo $row['ing_name'] . ',';
+//            }
+//        }
+        
+        if(isset($_GET['json'])) { //JSON for ajax app
+            $ingList = array();
+            while($row = $sth->fetch()) {
+                $ingList[] = $row['ing_name'];
             }
+            echo json_encode($ingList);
         }
         else {
             while ($row = $sth->fetch()) {
@@ -79,12 +87,14 @@ if(isset($_GET['ing'])) {
         
         $sth->execute();
         //output
-        if(isset($_GET['csv'])) {
+        if(isset($_GET['json'])) {
+            $effList = array();
             while($row = $sth->fetch()) {
                 if($row['value'] > 1) {
-                    echo $row['eff_name'].',';
+                    $effList[] = $row;
                 }
             }
+            echo json_encode($effList);
         }
         else {
             while ($row = $sth->fetch()) {
@@ -107,10 +117,12 @@ else if (isset($_GET['eff'])) {
         $sth->execute();
         
         //output
-        if (isset($_GET['csv'])) {
+        if (isset($_GET['json'])) {
+            $effList = array();
             while ($row = $sth->fetch()) {
-                echo $row['eff_name'] . ',';
+                $effList[] = $row['eff_name'];
             }
+            echo json_encode($effList);
         }
         else {
             while ($row = $sth->fetch()) {
@@ -154,20 +166,26 @@ else if (isset($_GET['eff'])) {
 
         //var_dump($recipe);
         
-        foreach($recipe as $ingredient) {
-            if ($ingredient['link']) {
-                echo '<dt class="link">**' . $ingredient['ing_name'] . '**</dt>';
-                echo '<dd class="link">' . $ingredient['eff_name'] . '</dd>';
-                echo '<dd class="link">' . $ingredient['weight'] . '</dd>';
-                echo '<dd class="link">' . $ingredient['value'] . '</dd>';
-                echo '<dd class="link">' . $ingredient['location'] . '</dd>';
-            } 
-            else {
-                echo '<dt>' . $ingredient['ing_name'] . '</dt>';
-                echo '<dd>' . $ingredient['eff_name'] . '</dd>';
-                echo '<dd>' . $ingredient['weight'] . '</dd>';
-                echo '<dd>' . $ingredient['value'] . '</dd>';
-                echo '<dd>' . $ingredient['location'] . '</dd>';
+        //output
+        
+        if(isset($_GET['json'])) {
+            echo json_encode($recipe);
+        }
+        else {
+            foreach ($recipe as $ingredient) {
+                if ($ingredient['link']) {
+                    echo '<dt class="link">**' . $ingredient['ing_name'] . '**</dt>';
+                    echo '<dd class="link">' . $ingredient['eff_name'] . '</dd>';
+                    echo '<dd class="link">' . $ingredient['weight'] . '</dd>';
+                    echo '<dd class="link">' . $ingredient['value'] . '</dd>';
+                    echo '<dd class="link">' . $ingredient['location'] . '</dd>';
+                } else {
+                    echo '<dt>' . $ingredient['ing_name'] . '</dt>';
+                    echo '<dd>' . $ingredient['eff_name'] . '</dd>';
+                    echo '<dd>' . $ingredient['weight'] . '</dd>';
+                    echo '<dd>' . $ingredient['value'] . '</dd>';
+                    echo '<dd>' . $ingredient['location'] . '</dd>';
+                }
             }
         }
         /*

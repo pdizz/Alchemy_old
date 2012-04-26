@@ -59,9 +59,10 @@ $(document).ready(function() {
     
     //Load all ingredients and append DOM elements
     $.ajax({
-        url : 'php/ings.php',
+        url : 'php/alchemy.php',
         data : {
-            id : 'all'
+            ing : 'all',
+            json : true
         },
         type : 'GET',
         dataType : 'json',
@@ -72,6 +73,24 @@ $(document).ready(function() {
             $.each(json, function(val, text) {
                 opts += '<li class="ui-widget-content">' + text + '</li>';
                 $ingredients.html(opts);
+            });
+        }
+    });
+    
+    //load all effects
+    $.ajax({
+        url : 'php/alchemy.php',
+        data : {
+            eff : 'all',
+            json : true
+        },
+        type : 'GET',
+        dataType : 'json',
+        success : function(json) {
+            var opts = '';
+            $.each(json, function(val, text) {
+                opts += '<li class="ui-widget-content">' + text + '</li>';
+                $effects.html(opts);
             });
         }
     });
@@ -88,9 +107,10 @@ $(document).ready(function() {
             });
 
             $.ajax({
-                url : 'php/effs.php',
+                url : 'php/alchemy.php',
                 data : {
-                    id : JSON.stringify(selected)
+                    ing : selected.join(','),
+                    json : true
                 },
                 type : 'GET',
                 dataType : 'json',
@@ -117,9 +137,10 @@ $(document).ready(function() {
                 selected.push($(this).text());
             });
             $.ajax({
-                url : 'php/recipe.php',
+                url : 'php/alchemy.php',
                 data : {
-                    id : JSON.stringify(selected)
+                    eff : selected.join(','),
+                    json : true
                 },
                 type : 'GET',
                 dataType : 'json',
@@ -132,7 +153,7 @@ $(document).ready(function() {
                     });
                     //console.log(selectedIngs);
                     for(var i=0; i<json.length; i++) {
-                        if(selectedIngs.indexOf(json[i]['ing_name']) !== -1) {
+                        if(selectedIngs.indexOf(json[i]['ing_name']) !== -1 || selectedIngs.length < 1) {
                             /************INSERT IMAGE**********************/
                             //opts += '<img src="images/no.jpg"></img>';
                             
